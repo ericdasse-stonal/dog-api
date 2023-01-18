@@ -33,3 +33,30 @@ def test_list_breeds(dog_api):
     )
 
     assert actual_response == expected_response
+
+
+def test_search_breeds(dog_api):
+    """
+    Unit test to search dog breeds
+    :param dog_api: Class Object Parameter from conftest.
+        Type - DogAPI
+    :return: None
+    """
+
+    expected_response = [
+        {
+            "weight": {"imperial": "17 - 23", "metric": "8 - 10"},
+            "height": {"imperial": "13.5 - 16.5", "metric": "34 - 42"},
+            "id": 222,
+            "name": "Shiba Inu",
+            "bred_for": "Hunting in the mountains of Japan, Alert Watchdog",
+            "breed_group": "Non-Sporting",
+            "life_span": "12 - 16 years",
+            "temperament": "Charming, Fearless, Keen, Alert, Confident, Faithful",
+            "reference_image_id": "Zn3IjPX3f",
+        }
+    ]
+
+    actual_response = dog_api.search_breeds(query_str="shiba")
+
+    assert actual_response == expected_response
