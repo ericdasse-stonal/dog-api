@@ -9,4 +9,4 @@ __pycache__/
 
 
 # Pytest
-tests/unit/pytest.ini
+pytest.ini
