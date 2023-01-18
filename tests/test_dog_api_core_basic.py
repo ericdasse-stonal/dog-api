@@ -60,3 +60,23 @@ def test_search_breeds(dog_api):
     actual_response = dog_api.search_breeds(query_str="shiba")
 
     assert actual_response == expected_response
+
+
+def test_create_vote(dog_api):
+    """
+    Unit test to vote on dog breeds images
+    :param dog_api: Class Object Parameter from conftest. Type - DogAPI
+    :return: None
+    """
+
+    expected_response = {
+        "message": "SUCCESS",
+        "id": 129143,
+        "image_id": "asf2",
+        "value": 1,
+        "country_code": "AR",
+    }
+
+    actual_response = dog_api.create_vote(payload={"image_id": "asf2", "value": 1})
+
+    assert actual_response["message"] == expected_response["message"]
