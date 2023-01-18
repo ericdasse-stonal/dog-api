@@ -1,3 +1,7 @@
+import json
+from dog_api.core import DogAPI
+
+
 def test_list_breeds(dog_api):
     """
     Unit test to list dog breeds
@@ -80,3 +84,18 @@ def test_create_vote(dog_api):
     actual_response = dog_api.create_vote(payload={"image_id": "asf2", "value": 1})
 
     assert actual_response["message"] == expected_response["message"]
+
+
+def test_dog_api_core_key_error():
+    """
+    Unit test to test auth on POST request
+    :return: None
+    """
+
+    dog_api_temp = DogAPI()
+    dog_api_temp.headers = {"Content-Type": "application/json", "x-api-key": "FAKE_KEY"}
+    expected_response = {"ERROR": "Authorization Error. Please check API Key"}
+
+    actual_response = dog_api_temp.create_vote(payload={"image_id": "asf2", "value": 1})
+
+    assert json.loads(actual_response) == expected_response
