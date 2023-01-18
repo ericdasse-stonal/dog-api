@@ -1,4 +1,6 @@
 import json
+
+import pytest
 from dog_api.core import DogAPI
 
 
@@ -99,3 +101,8 @@ def test_dog_api_core_key_error():
     actual_response = dog_api_temp.create_vote(payload={"image_id": "asf2", "value": 1})
 
     assert json.loads(actual_response) == expected_response
+
+
+def test_list_breeds_wrong_arg_type_value_error(dog_api):
+    with pytest.raises(ValueError):
+        dog_api.list_breeds(query_dict="Invalid")
