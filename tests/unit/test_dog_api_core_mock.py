@@ -44,3 +44,18 @@ def test_mock_search_breeds(mocker, dog_api):
     actual_mock_response = dog_api.search_breeds(query_str="Jack Russell Terrier")
 
     assert mocked_call_api_value == actual_mock_response
+
+
+def test_mock_create_vote(mocker, dog_api):
+    mocked_call_api_value = {
+        "message": "SUCCESS",
+        "id": 129143,
+        "image_id": "asf2",
+        "value": 1,
+        "country_code": "AR",
+    }
+    mocker.patch("dog_api.core.DogAPI.call_api", return_value=mocked_call_api_value)
+
+    actual_mock_response = dog_api.create_vote({"image_id": "asf2", "value": 1})
+
+    assert mocked_call_api_value == actual_mock_response
