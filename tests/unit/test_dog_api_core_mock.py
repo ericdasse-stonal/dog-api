@@ -25,3 +25,22 @@ def test_mock_list_breeds(mocker, dog_api):
     )
 
     assert mocked_call_api_value == actual_mock_response
+
+
+def test_mock_search_breeds(mocker, dog_api):
+    mocked_call_api_value = [
+        {
+            "weight": {"imperial": "13 - 17", "metric": "6 - 8"},
+            "height": {"imperial": "13 - 14", "metric": "33 - 36"},
+            "id": 139,
+            "name": "Jack Russell Terrier",
+            "bred_for": "Fox hunting",
+            "breed_group": "Terrier",
+            "life_span": "12 - 14 years",
+        }
+    ]
+    mocker.patch("dog_api.core.DogAPI.call_api", return_value=mocked_call_api_value)
+
+    actual_mock_response = dog_api.search_breeds(query_str="Jack Russell Terrier")
+
+    assert mocked_call_api_value == actual_mock_response
