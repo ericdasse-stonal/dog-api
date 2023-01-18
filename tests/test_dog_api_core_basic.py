@@ -106,3 +106,13 @@ def test_dog_api_core_key_error():
 def test_list_breeds_wrong_arg_type_value_error(dog_api):
     with pytest.raises(ValueError):
         dog_api.list_breeds(query_dict="Invalid")
+
+
+def test_create_vote_wrong_arg_type_value_error(dog_api):
+    with pytest.raises(ValueError):
+        dog_api.create_vote(payload="Invalid")
+
+
+def test_create_vote_wrong_payload_value_error(dog_api):
+    with pytest.raises(ValueError):
+        dog_api.create_vote(payload={"image_id": "xyz"})
